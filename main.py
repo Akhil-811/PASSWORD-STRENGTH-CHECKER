@@ -47,6 +47,17 @@ def check_password_strength(password):
     
     return feedback
 
+def toggle_password_visibility():
+    """
+    Function to toggle the visibility of the password in the entry widget.
+    """
+    if password_entry.cget("show") == "":
+        password_entry.config(show="*")
+        visibility_button.config(text="Show Password")
+    else:
+        password_entry.config(show="")
+        visibility_button.config(text="Hide Password")
+
 def on_check_password_strength():
     """
     Function to be called when the 'Check Strength' button is clicked.
@@ -72,9 +83,13 @@ password_label.pack(pady=10)
 password_entry = tk.Entry(root, show="*", width=30)
 password_entry.pack(pady=10)
 
+# Create a button to toggle password visibility
+visibility_button = tk.Button(root, text="Show Password", command=toggle_password_visibility)
+visibility_button.pack(pady=5)
+
 # Create a button to check the password strength
 check_button = tk.Button(root, text="Check Strength", command=on_check_password_strength)
-check_button.pack(pady=20)
+check_button.pack(pady=10)
 
 # Create a label to display the password strength
 strength_label = tk.Label(root, text="", font=("Helvetica", 12))
